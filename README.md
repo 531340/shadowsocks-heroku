@@ -9,80 +9,35 @@ Notice that the protocol is INCOMPATIBLE with the origin shadowsocks.
 
 Heroku
 ------
+仅供学习，后果自负 https://www.heroku.com/policy/aup
 
-### Usage
-
-```
-$ heroku create
-Creating still-tor-8707... done, stack is cedar-14
-http://still-tor-8707.herokuapp.com/ | git@heroku.com:still-tor-8707.git
-```
-
-Push the code to Heroku.
+ [![](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/neroku/shadowsocks-heroku/tree/heroku-test)
+  
+客户端 https://github.com/v2ray/v2ray-core/releases
 
 ```
-$ git push heroku master
-…
------> Compressing... done, 5.1MB
------> Launching... done, v3
-       http://still-tor-8707.herokuapp.com/ deployed to Heroku
-
-To git@heroku.com:still-tor-8707.git
- * [new branch]      master -> master
-```
-
-Set a few configs:
-
-```
-$ heroku config:set METHOD=rc4 KEY=foobar
-Setting config vars and restarting still-tor-8707... done, v11
-KEY:    foobar
-METHOD: rc4
-```
-
-Install project dependencies with `npm install`:
-
-```
-$ npm install
-…
-```
-
-Then run:
-
-```
-$ node local.js -s still-tor-8707.herokuapp.com -l 1080 -m rc4 -k foobar -r 80
-server listening at { address: '127.0.0.1', family: 'IPv4', port: 1080 }
-```
-
-Change proxy settings of your browser into:
-
-```
-SOCKS5 127.0.0.1:1080
-```
-
-### Troubleshooting
-
-If there is something wrong, you can check the logs by:
-
-```
-$ heroku logs -t --app still-tor-8707
+"outbound": {
+		"protocol": "shadowsocks",
+		"settings": {
+			"servers": [{
+				"address": "neroku.herokuapp.com",
+				"port": 80,
+				"method": "aes-256-cfb",
+				"password": "justest",
+				"ota": false
+			}]
+		},
+		"mux": {
+			"enabled": false
+		},
+		"streamSettings": {
+			"network": "ws"
+		}
+	},
 ```
 
 Supported Ciphers
 -----------------
-
-- rc4
-- rc4-md5
-- table
-- bf-cfb
-- des-cfb
-- rc2-cfb
-- idea-cfb
-- seed-cfb
-- cast5-cfb
 - aes-128-cfb
-- aes-192-cfb
 - aes-256-cfb
-- camellia-256-cfb
-- camellia-192-cfb
-- camellia-128-cfb
+
